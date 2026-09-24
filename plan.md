@@ -14,47 +14,54 @@ Reference: see `spec.md` for exact algorithms and parameters this plan implement
   least 3 test cases, including one that wraps both `X^n` and `q`.
 
 ### M2 — KeyGen
-- [ ] Implement matrix sampling, `s1`, `s2`, and `t = A·s1 + s2`.
-- [ ] Sanity check: print `A, s1, s2, t` for a small run; confirm `t` shows no
+- [X] Implement matrix sampling, `s1`, `s2`, and `t = A·s1 + s2`.
+- [X] Sanity check: print `A, s1, s2, t` for a small run; confirm `t` shows no
       visible structure/pattern relative to `s1, s2` (informal "does it look
       random" check, not a statistical test).
-- **Exit criteria:** KeyGen runs deterministically given a fixed random seed
+- **Exit criteria met:** KeyGen runs deterministically given a fixed random seed
   (for reproducible tests) and non-deterministically otherwise.
 
+M2 is implemented in `keygen.py`; its core invariant is the Module-LWE relation
+`t = A·s1 + s2 (mod q)` with bounded `s1` and `s2`.
+
 ### M3 — Sign / Verify (honest path)
-- [ ] Implement `Sign` with rejection sampling and restart-counting.
-- [ ] Implement `Verify`.
-- [ ] Test: sign 100 messages, verify all succeed.
-- [ ] Test: tamper with one byte of a signed message, confirm verification fails.
-- [ ] Test: tamper with one coefficient of `z`, confirm verification fails.
-- [ ] Log and report average restart count across ≥100 signing runs.
-- **Exit criteria:** 100/100 honest verifications pass; all tamper tests correctly reject.
+- [X] Implement `Sign` with rejection sampling and restart-counting.
+- [X] Implement `Verify`.
+- [X] Test: sign 100 messages, verify all succeed.
+- [X] Test: tamper with one byte of a signed message, confirm verification fails.
+- [X] Test: tamper with one coefficient of `z`, confirm verification fails.
+- [X] Log and report average restart count across ≥100 signing runs.
+- **Exit criteria met:** 100/100 honest verifications pass; all tamper tests correctly reject.
+
+M3 is implemented in `sign.py`; its core logic protects fresh-`y` rejection sampling and commitment/challenge integrity.
 
 ### M4 — Attack demo
-- [ ] Implement `SignBroken` (no rejection check, or `y`-reuse variant), in an
+- [X] Implement `SignBroken` (no rejection check, or `y`-reuse variant), in an
       isolated module per `spec.md` §4.4.
-- [ ] Implement the extraction script: given two `SignBroken` outputs with shared
+- [X] Implement the extraction script: given two `SignBroken` outputs with shared
       `w`, compute `u` per the derivation in `spec.md` §5.
-- [ ] Verify numerically: `[A|I]·u ≡ 0 (mod q)` and report `||u||_∞`.
-- [ ] Confirm `u` is nonzero and its norm is small relative to `q` — i.e., a
+- [X] Verify numerically: `[A|I]·u ≡ 0 (mod q)` and report `||u||_∞`.
+- [X] Confirm `u` is nonzero and its norm is small relative to `q` — i.e., a
       genuine (toy-scale) SIS solution, not a degenerate all-zero result.
-- [ ] Recover `s2` from `u`'s second half via `s2 = −u_2 / (c−c')` (ring
+- [X] Recover `s2` from `u`'s second half via `s2 = −u_2 / (c−c')` (ring
       inversion of `(c−c')`, same technique as the NTRU `f⁻¹` inversion),
       and confirm it matches the real `s2` from `KeyGen` — i.e., go beyond an
       abstract SIS witness and show the attack actually leaks the secret key.
-- **Exit criteria:** attack script reliably (across ≥10 trials) extracts a
+- **Exit criteria met:** attack script reliably (across ≥10 trials) extracts a
   valid, nonzero, short `u` from `SignBroken` output; running the same script
   against honest `Sign` output correctly fails to produce a usable `u` (or is
   not even attempted, since `w` differs every time by design). The recovered
   `s2` matches the real secret key in all successful trials.
 
 ### M5 — Size accounting
-- [ ] Compute and print public key / signature byte sizes for the chosen toy parameters.
-- [ ] Generate one ECDSA (secp256k1) keypair + signature via a standard library
+- [X] Compute and print public key / signature byte sizes for the chosen toy parameters.
+- [X] Generate one ECDSA (secp256k1) keypair + signature via a standard library
       for comparison.
-- [ ] Produce a small comparison table (toy Dilithium-lite vs. ECDSA vs., if time
+- [X] Produce a small comparison table (toy Dilithium-lite vs. ECDSA vs., if time
       permits, published real-Dilithium sizes from `spec.md`'s reference table).
-- **Exit criteria:** table with three columns (this project / ECDSA / real ML-DSA reference) is generated and reads sensibly.
+- **Exit criteria met:** table with three columns (this project / ECDSA / real ML-DSA reference) is generated and reads sensibly.
+
+M5 is implemented in `sizes.py`; its core invariant is consistent byte counting for the chosen toy representation.
 
 ### M6 — Write-up (blog / portfolio post)
 - [ ] Draft narrative per the structure agreed on: lead with the attack (M4),
