@@ -64,14 +64,17 @@ M3 is implemented in `sign.py`; its core logic protects fresh-`y` rejection samp
 M5 is implemented in `sizes.py`; its core invariant is consistent byte counting for the chosen toy representation.
 
 ### M6 — Write-up (blog / portfolio post)
-- [ ] Draft narrative per the structure agreed on: lead with the attack (M4),
+- [X] Draft narrative per the structure agreed on: lead with the attack (M4),
       then unpack the theory, then the size comparison, with an explicit
       toy-parameters disclaimer.
-- [ ] Pair each major code section with the corresponding hand-derived algebra
+- [X] Pair each major code section with the corresponding hand-derived algebra
       (ring reduction example, the `A(z-z') = (c-c')t` derivation, etc.).
-- [ ] Link back to blockchain/wallet context (Ethereum PQC migration discussion)
+- [X] Link back to blockchain/wallet context (Ethereum PQC migration discussion)
       in intro and conclusion.
-- **Exit criteria:** `README.md` finalized and cross-linked to the post.
+- **Exit criteria met:** private `blog.md` draft completed; publication is intentionally excluded by `.gitignore`.
+
+M6 is implemented in the ignored `blog.md`; it documents the attack algebra,
+ring and signing invariants, size comparison, and blockchain context.
 
 ## Stack
 
