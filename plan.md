@@ -5,9 +5,9 @@ Reference: see `spec.md` for exact algorithms and parameters this plan implement
 ## Milestones
 
 ### M1 — Ring arithmetic
-- [ ] Implement `add`, `mul` (with `X^n ≡ -1` reduction), coefficient mod-`q` reduction.
-- [ ] Implement `sample_small(bound)` and `sample_challenge(tau)`.
-- [ ] Unit test: pick two known small polynomials, multiply by hand (on paper),
+- [X] Implement `add`, `mul` (with `X^n ≡ -1` reduction), coefficient mod-`q` reduction.
+- [X] Implement `sample_small(bound)` and `sample_challenge(tau)`.
+- [X] Unit test: pick two known small polynomials, multiply by hand (on paper),
       compare to code output. Reuse the manual NTRU-style verification method
       from the research phase (`f·f⁻¹ ≡ 1`-style checks) as a template.
 - **Exit criteria:** ring multiplication matches hand-computed examples for at

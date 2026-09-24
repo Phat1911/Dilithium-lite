@@ -20,3 +20,4 @@
 - After any code change, run the relevant tests and show their result before claiming completion. If tests cannot run, state why and report what was run instead.
 - For code marked **core logic** in `PLAN.md` (or `plan.md`), explain what it does and which risk or invariant it protects.
 - Do not deploy, publish, commit, push, or make external changes unless I explicitly ask.
+- After each milestone, mark/comment at where that milestone is implemented and check the completed tasks in plan.md after each milestone.
